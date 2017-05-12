@@ -129,22 +129,7 @@ m = toString(mean(preds,na.rm=TRUE))
 write.csv(preds, file = "results_Lasso.csv",na=m)
 ###score/ rmse = 0.12967 on test set
 
-###model3-randomForest
-X_train <- all_data[1:nrow(train),]
-X_test <- all_data[(nrow(train)+1):nrow(all_data),]
-X_train[["SalePrice"]] <- exp(y)
-X_train <- X_train[ , apply(X_train, 2, function(x) !any(is.na(x)))]
 
-rf = randomForest(SalePrice~., data=X_train, importance=TRUE)
-
-importance(rf)
-varImpPlot(rf)
-
-#predict
-tree.pred = predict(rf, X_test)
-m = toString(mean(tree.pred,na.rm=TRUE))
-write.csv(tree.pred, file = "results_RF.csv",na=m)
-###score/ rmse = 0.14641 on test set
 
 
 
